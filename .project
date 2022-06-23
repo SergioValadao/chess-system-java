@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<location>C:/Program Files/Java/jre1.8.0_333/lib</location>
+		</link>
+	</linkedResources>
 </projectDescription>
