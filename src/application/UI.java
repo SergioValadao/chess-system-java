@@ -38,10 +38,14 @@ public class UI {
 	public static ChessPosition readChessPosition(Scanner sc) {
 		
 		try {
-		String s = sc.nextLine();
-		char Column = s.charAt(0);		
-		int row = Integer.parseInt(s.substring(1));
-		return new ChessPosition(Column, row);
+			String s = sc.nextLine();
+			char Column = s.charAt(0);
+			if(Column == 's') {
+				System.out.println("Fim de jogo");
+				System.exit(0);
+			}
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(Column, row);
 		}catch(RuntimeException e) {
 			throw new InputMismatchException("Valor validos estão entre 'a1' e 'h8'. Verifique!");			
 		}
@@ -52,16 +56,31 @@ public class UI {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print(8 - i + " ");
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j], false);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print(8 - i + " ");
+			for (int j = 0; j < pieces.length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 	}
 
-	private static void printPiece(ChessPiece piece) {
+
+	private static void printPiece(ChessPiece piece, boolean backgroud) {
+		if(backgroud) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
     	if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if (piece.getColor() == Color.WHITE) {
