@@ -17,6 +17,7 @@ public class ChessMatch {
 	private Board board;
 	private Piece capturedPiece;
 	private boolean check;
+	private boolean checkMate;
 	private List<Piece> pieceOnTheBoard = new ArrayList<>();
 	private List<Piece> capturedPieces = new ArrayList<>();
 	
@@ -37,6 +38,10 @@ public class ChessMatch {
 	
 	public boolean getCheck() {
 		return check;
+	}
+	
+	public  boolean getCheckMate() {
+		return checkMate;
 	}
 	
 	public ChessPiece[][] getPieces(){
@@ -68,6 +73,9 @@ public class ChessMatch {
 		}
 		check = (testeCheck(opponent(currentPlayer)) ? true : false);
 		
+		if(testCheckMate(opponent(currentPlayer))) {
+			checkMate = true;
+		}
 		nextTurn();
 		return (ChessPiece) capturedPiece;
 	}
@@ -134,6 +142,32 @@ public class ChessMatch {
 			boolean[][] mat = p.possibleMovies();
 			if(mat[kingPosition.getRow()][kingPosition.getColumn()]){
 				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean testCheckMate(Color color) {
+		if(!testeCheck(color)) {
+			return false;
+		}
+		List<Piece> list = pieceOnTheBoard.stream().filter(x -> ( (ChessPiece)x).getColor() == color).collect(Collectors.toList());
+		for(Piece p: list) {
+			boolean[][] mat= p.possibleMovies();
+			for(int i=0; i<board.getRow(); i++) {
+				for(int j=0; j<board.getColumns(); j++) {
+					if(mat[i][j]) {
+						Position source = ((ChessPiece)p).getChessPosition().toPosition();
+						Position target = new Position(i,j);
+						Piece capturedPiece = makeMove(source, target);
+						boolean testCheck = testeCheck(color);
+						undoMove(source, target, capturedPiece);
+						if(!testCheck) {
+							return false;
+						}
+						
+					}
+				}
 			}
 		}
 		return false;
