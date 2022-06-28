@@ -16,7 +16,8 @@ public class King extends ChessPiece{
 		return "R";
 	}
 
-	// acenelio criou(eu não) uma funcao para saber se podia mover a peça.
+	// acenelio criou(eu não) uma funcao para saber se podia mover o rei. 
+	// Eu utilizei a mesma função das outras peças
 	
 	@Override
 	public boolean[][] possibleMovies() {
