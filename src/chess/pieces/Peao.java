@@ -23,39 +23,27 @@ public class Peao extends ChessPiece{
 		boolean[][] mat = new boolean[getBoard().getRow()][getBoard().getColumns()];
 		
 		int cor = getColor() == Color.WHITE ? 1: -1;
-				
+					
 		p.setValues(position.getRow()-1*cor, position.getColumn());		
 		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
+			mat[p.getRow()][p.getColumn()] = true;			
 		}
-		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
-		
 		p.setValues(position.getRow()-2*cor, position.getColumn());
-		Position p2 = new Position(position.getRow()-2*cor, position.getColumn());
-		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2) && !getBoard().thereIsAPiece(p2)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}			
-		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+		Position p2 = new Position(position.getRow()-1*cor, position.getColumn());
+		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2) && !getBoard().thereIsAPiece(p2) ) {
+			mat[p.getRow()][p.getColumn()] = true;			
+		}
+		p.setValues(position.getRow()-1*cor, position.getColumn()-1);		
+		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
-
-		p.setValues(position.getRow()-1*cor, position.getColumn()-1*cor);		
+		p.setValues(position.getRow()-1*cor, position.getColumn()+1);		
 		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
+			mat[p.getRow()][p.getColumn()] = true;			
 		}
-
-		p.setValues(position.getRow()-1*cor, position.getColumn()+1*cor);		
-		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
-		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}			
 		return mat;
 	}
 }

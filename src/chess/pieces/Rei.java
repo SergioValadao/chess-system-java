@@ -25,12 +25,12 @@ public class Rei extends ChessPiece{
 		
 		Position p = new Position(0,0);
 		//Above
-		p.setValues(position.getRow() -1, position.getColumn());		
+		p.setValues(position.getRow()-1, position.getColumn());		
 		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 		//below
-		p.setValues(position.getRow() +1, position.getColumn());		
+		p.setValues(position.getRow()+1, position.getColumn());		
 		if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
@@ -68,7 +68,6 @@ public class Rei extends ChessPiece{
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;			
 		}

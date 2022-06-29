@@ -21,7 +21,6 @@ public class Program{
 		while (!chess.getCheck()) {
 			try {
 				UI.clearScreen();
-				//UI.printBoard(chess.getPieces()); subistituida por printMatch
 				UI.printMatch(chess, captured);
 				System.out.println();
 				System.out.print("Source (Letra e Numero): ");
